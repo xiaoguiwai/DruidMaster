@@ -115,7 +115,7 @@ namespace DruidMaster
             get
             {
 
-                if (lowestHealthFriend.HealthPercentage == 100 && RejuventurationCount < 4)
+                if (lowestHealthFriend.HealthPercentage >=95 && RejuventurationCount < 4)
                 {
                     if (Need_Rejuvenation(Me))
                     {
@@ -312,9 +312,7 @@ namespace DruidMaster
         //目标排序方法（按照血量）
         public static int CompareByHeathPercentage(WowPlayer player1, WowPlayer player2)
         {
-            if (player1 == null || player2 == null)
-                return 0;
-
+           
             if (player1.HealthPercentage == player2.HealthPercentage)
             {
                 return 0;
@@ -323,11 +321,11 @@ namespace DruidMaster
             {
                 if (player1.HealthPercentage > player2.HealthPercentage)
                 {
-                    return 0;
+                    return 1;
                 }
                 else
                 {
-                    return 1;
+                    return -1;
                 }
             }
 
@@ -480,18 +478,22 @@ namespace DruidMaster
         {
             if (target.HealthPercentage < EssenceofGHanirArtifact_Healthcheck_single)
             {
+                target = Me;
                 return true;
             }
             if (friednsinDangerCount > FriendsinDanger)
             {
+                target = Me;
                 return true;
             }
+            target = Me;
             return false;
         }
         public bool UpdateInnervateCheck()
         {
             if (lowhealthfriendCOunt >= 4 || friednsinDangerCount >= 3)
             {
+                Target = Me;
                 return true;
             }
             return false;
