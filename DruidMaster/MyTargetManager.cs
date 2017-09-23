@@ -360,7 +360,7 @@ namespace DruidMaster
             //各类单位集合更新数据 
             Me = Game.Instance.Player;
             Me.Update();
-            players = Game.Instance.Manager.Objects.OfType<WowPlayer>().Where(x => x.Distance < 40 && x.InLoS).ToList();
+            players = Game.Instance.Manager.Objects.OfType<WowPlayer>().Where(x => x.Distance < 40 && x.InLoS&&!x.IsACorpse).ToList();
             foreach (var player in players)
             {
                 player.Update();
